@@ -1,14 +1,14 @@
-#ifndef OTA_HANDLER_H
-#define OTA_HANDLER_H
+#ifndef OTA_HANDLER_impl_H
+#define OTA_HANDLER_impl_H
 
 #include <Arduino.h>
 
 #include <ESP8266HTTPClient.h>
 //#include <ESP8266httpClient.h>
 #include <ESP8266httpUpdate.h>
+#include "OtaHandler.h"
 
-
-class OtaHandler {
+class OtaHandlerImpl : public OtaHandler {
 private:
   char *host = "soeren.herokuapp.com";
   //char path[] = "/name?device=z67oVnbt";
@@ -18,10 +18,18 @@ private:
   WiFiClient *wifiClient;
   Stream *debugStream;
 public:
-  OtaHandler(WiFiClient *wifiClient, char *deviceId, char *user, char *password, Stream *debugStream)
+  OtaHandlerImpl(WiFiClient *wifiClient, char *deviceId, char *user, char *password, Stream *debugStream)
     : wifiClient(wifiClient), deviceId(deviceId), user(user), password(password),debugStream(debugStream) {}
 
-  void doOtaIfNeeded(char *fileName, char *theVersion) {
+ int getLastError() override {
+   return ESPhttpUpdate.getLastError();
+ };
+
+ String getLastErrorString() override {
+   return ESPhttpUpdate.getLastErrorString();
+ };
+
+  void doOtaIfNeeded(char *fileName, char *theVersion) override {
     //strstr returns null if the version isn't in the filename, else it returns a pointer to the string within the other stringt
     char *result = strstr(fileName, theVersion);
     boolean needToUpdate = (result == NULL);

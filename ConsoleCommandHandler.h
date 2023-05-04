@@ -1,5 +1,4 @@
-#ifndef CONSOLE_COMMAND_HANDLER_h
-#define CONSOLE_COMMAND_HANDLER_h
+#pragma once
 
 #include <Arduino.h>
 
@@ -7,5 +6,3 @@ class ConsoleCommandHandler {
   public:
     virtual void handle() = 0;
 };
-
-#endif
