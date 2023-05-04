@@ -1,5 +1,5 @@
 #include "ConsoleCommandHandler.h"
-#include "ConsoleHandler.cpp"
+#include <ConsoleHandler.cpp>
 #include <TelnetStream.h>
 
 char *theVersion = "the version";
