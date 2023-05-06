@@ -42,6 +42,9 @@ public:
           stream->print(componentName);
           stream->print(F(" in version "));
           stream->println(theVersion);
+          stream->println(F("r: restart"));
+          stream->println(F("i: get crash output"));
+          stream->println(F("c: clear crash infomation"));
           break;
         case 0xa:
         case 0xd:
